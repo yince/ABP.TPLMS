@@ -47,6 +47,14 @@ namespace ABP.TPLMS.Web.Startup
                 )
                 .AddItem(
                     new MenuItemDefinition(
+                        PageNames.Module,
+                        L("Module"),
+                        url: "Module",
+                        icon: "local_offer"
+                    )
+                )
+                .AddItem(
+                    new MenuItemDefinition(
                         PageNames.About,
                         L("About"),
                         url: "About",

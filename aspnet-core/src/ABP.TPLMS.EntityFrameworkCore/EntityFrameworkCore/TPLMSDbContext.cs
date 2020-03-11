@@ -2,10 +2,12 @@
 using Abp.Zero.EntityFrameworkCore;
 using ABP.TPLMS.Authorization.Roles;
 using ABP.TPLMS.Authorization.Users;
+using ABP.TPLMS.Entities;
 using ABP.TPLMS.MultiTenancy;
 
 namespace ABP.TPLMS.EntityFrameworkCore
 {
+    // ReSharper disable once InconsistentNaming
     public class TPLMSDbContext : AbpZeroDbContext<Tenant, Role, User, TPLMSDbContext>
     {
         /* Define a DbSet for each entity of the application */
@@ -14,5 +16,7 @@ namespace ABP.TPLMS.EntityFrameworkCore
             : base(options)
         {
         }
+
+        public DbSet<Module> Modules { get; set; }
     }
 }
