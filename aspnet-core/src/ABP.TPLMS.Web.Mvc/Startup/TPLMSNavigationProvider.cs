@@ -55,6 +55,14 @@ namespace ABP.TPLMS.Web.Startup
                 )
                 .AddItem(
                     new MenuItemDefinition(
+                        PageNames.Supplier,
+                        L("Supplier"),
+                        url: "Supplier",
+                        icon: "people"
+                    )
+                )
+                .AddItem(
+                    new MenuItemDefinition(
                         PageNames.About,
                         L("About"),
                         url: "About",
