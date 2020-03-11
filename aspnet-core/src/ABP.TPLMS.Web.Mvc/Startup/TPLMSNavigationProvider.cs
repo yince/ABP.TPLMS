@@ -1,6 +1,7 @@
 ﻿using Abp.Application.Navigation;
 using Abp.Localization;
 using ABP.TPLMS.Authorization;
+using ABP.TPLMS.Modules;
 
 namespace ABP.TPLMS.Web.Startup
 {
@@ -9,8 +10,16 @@ namespace ABP.TPLMS.Web.Startup
     /// </summary>
     public class TPLMSNavigationProvider : NavigationProvider
     {
+        IModuleAppService _moduleAppService;
+
+        public TPLMSNavigationProvider(IModuleAppService moduleApp)
+        {
+            _moduleAppService = moduleApp;
+        }
+
         public override void SetNavigation(INavigationProviderContext context)
         {
+            var subMenu = new DynamicAddMenu(_moduleAppService).AddMenus();
             context.Manager.MainMenu
                 .AddItem(
                     new MenuItemDefinition(
@@ -61,6 +70,7 @@ namespace ABP.TPLMS.Web.Startup
                         icon: "people"
                     )
                 )
+                .AddItem(subMenu)
                 .AddItem(
                     new MenuItemDefinition(
                         PageNames.About,

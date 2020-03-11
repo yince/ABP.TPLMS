@@ -20,7 +20,7 @@ namespace ABP.TPLMS.Web.Controllers
         public async Task<IActionResult> Index()
         {
 
-            var module = (await _supplierAppService.GetAll(new PagedSupplierResultRequestDto { MaxResultCount = MaxNum })).Items;
+            var module = (await _supplierAppService.GetAll(new PagedSupplierResultRequestDto { MaxResultCount = MaxNum })).Items.OrderBy(s=>s.CreationTime).ToList();
             // Paging not implemented yet
             SupplierDto cuModule = module.FirstOrDefault();
             var model = new SupplierListViewModel
