@@ -9,5 +9,7 @@
         public const string Roles = "Roles";
         public const string Module = "Module";
         public const string Supplier = "Supplier";
+        public const string Cargo = "Cargo";
+
     }
 }

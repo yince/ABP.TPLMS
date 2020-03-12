@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Abp.Application.Navigation;
 using Abp.Localization;
 using ABP.TPLMS.Entities;
@@ -36,12 +34,11 @@ namespace ABP.TPLMS.Web.Startup
         }
 
         // 递归算法
-        private void FillMenu(MenuItemDefinition menu, int ParentId, List<Module> modules)
+        private void FillMenu(MenuItemDefinition menu, int parentId, List<Module> modules)
         {
-            List<Module> drs = modules.Where(x => x.ParentId == ParentId).ToList();
-            if (drs == null || drs.Count <= 0)
+            List<Module> drs = modules.Where(x => x.ParentId == parentId).ToList();
+            if (drs.Count <= 0)
             {
-                return;
             }
             else
             {

@@ -15,5 +15,18 @@ namespace ABP.TPLMS.Controllers
         {
             identityResult.CheckErrors(LocalizationManager);
         }
+
+        protected dynamic JsonEasyUI(dynamic t, int total)
+        {
+
+            var obj = new
+            {
+                total = total,
+                rows = t
+            };
+
+            var json = Json(obj);
+            return json;
+        }
     }
 }

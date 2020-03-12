@@ -8,9 +8,10 @@ namespace ABP.TPLMS.Web.Startup
     /// <summary>
     /// This class defines menus for the application.
     /// </summary>
+    // ReSharper disable once InconsistentNaming
     public class TPLMSNavigationProvider : NavigationProvider
     {
-        IModuleAppService _moduleAppService;
+        readonly IModuleAppService _moduleAppService;
 
         public TPLMSNavigationProvider(IModuleAppService moduleApp)
         {
@@ -70,7 +71,15 @@ namespace ABP.TPLMS.Web.Startup
                         icon: "people"
                     )
                 )
-                .AddItem(subMenu)
+                .AddItem(
+                    new MenuItemDefinition(
+                        PageNames.Cargo,
+                        L("Cargo"),
+                        url: "Cargo",
+                        icon: "people"
+                    )
+                )
+                //.AddItem(subMenu)
                 .AddItem(
                     new MenuItemDefinition(
                         PageNames.About,
