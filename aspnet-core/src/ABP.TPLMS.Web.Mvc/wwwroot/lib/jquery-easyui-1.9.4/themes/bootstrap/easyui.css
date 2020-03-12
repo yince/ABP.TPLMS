@@ -3670,3 +3670,13 @@
   background: transparent;
   color: #333;
 }
+.datagrid-header-check input[type=checkbox],
+.datagrid-cell-check input[type=checkbox] {
+    position: absolute;
+    left: 5px;
+    opacity: 1;
+    margin: 0;
+    padding: 0;
+    width: 15px;
+    height: 18px;
+}

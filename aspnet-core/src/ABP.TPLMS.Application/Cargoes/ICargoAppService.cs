@@ -13,6 +13,6 @@ namespace ABP.TPLMS.Cargoes
         CreateUpdateCargoDto, //用于创建货物信息
         CreateUpdateCargoDto> //用于更新货物信息
     {
-
+        string DeleteBatch(string ids);
     }
 }

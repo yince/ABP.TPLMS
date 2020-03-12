@@ -22,5 +22,7 @@ namespace ABP.TPLMS.EntityFrameworkCore
         public DbSet<Supplier> Suppliers { get; set; }
 
         public DbSet<Cargo> Cargos { get; set; }
+
+        public DbSet<Org> Orgs { get; set; }
     }
 }

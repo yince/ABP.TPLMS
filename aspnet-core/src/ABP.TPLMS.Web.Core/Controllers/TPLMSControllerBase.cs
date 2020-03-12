@@ -16,7 +16,7 @@ namespace ABP.TPLMS.Controllers
             identityResult.CheckErrors(LocalizationManager);
         }
 
-        protected dynamic JsonEasyUI(dynamic t, int total)
+        protected dynamic JsonEasyUi(dynamic t, int total)
         {
 
             var obj = new
@@ -25,7 +25,25 @@ namespace ABP.TPLMS.Controllers
                 rows = t
             };
 
-            var json = Json(obj);
+            var json = Helpers.JsonHelper.Instance.Serialize(obj);
+            return json;
+        }
+
+        protected dynamic JsonEasyUiResult(int id, string result)
+        {
+
+            string strId = string.Empty;
+            if (id > 0)
+            {
+                strId = id.ToString();
+            }
+
+            var obj = new
+            {
+                result = result,
+                Id = strId
+            };
+            var json = Helpers.JsonHelper.Instance.Serialize(obj);
             return json;
         }
     }

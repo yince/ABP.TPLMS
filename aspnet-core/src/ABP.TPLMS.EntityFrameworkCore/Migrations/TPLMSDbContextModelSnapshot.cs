@@ -284,6 +284,55 @@ namespace ABP.TPLMS.Migrations
                     b.ToTable("Modules");
                 });
 
+            modelBuilder.Entity("ABP.TPLMS.Entities.Org", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BizCode")
+                        .HasMaxLength(255);
+
+                    b.Property<int>("CreateId");
+
+                    b.Property<DateTime>("CreationTime");
+
+                    b.Property<string>("CustomCode")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("HotKey")
+                        .HasMaxLength(255);
+
+                    b.Property<string>("IconName")
+                        .HasMaxLength(255);
+
+                    b.Property<bool>("IsAutoExpand");
+
+                    b.Property<bool>("IsLeaf");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<int>("ParentId");
+
+                    b.Property<string>("ParentName")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<int>("SortNo");
+
+                    b.Property<int>("Status");
+
+                    b.Property<int>("Type");
+
+                    b.Property<DateTime>("UpdateTime");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orgs");
+                });
+
             modelBuilder.Entity("ABP.TPLMS.Entities.Supplier", b =>
                 {
                     b.Property<int>("Id")

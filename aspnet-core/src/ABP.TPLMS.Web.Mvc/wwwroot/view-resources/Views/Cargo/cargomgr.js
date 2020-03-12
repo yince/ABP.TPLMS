@@ -14,6 +14,7 @@ function initable() {
         border: false,
         idField: "Id",
         sortName: "Id",
+        toolbar: "#dg-button",
         sortOrder: "asc",
         frozenColumns: [[//冻结列
             { field: "ck", checkbox: true, align: "left", width: 50 }
@@ -22,6 +23,7 @@ function initable() {
         columns: [[
             { title: "编号", field: "Id", width: 50, sortable: true },
             { title: "供应商", field: "SupplierId", width: 80, sortable: true },
+            { title: "商品编码", field: "HSCode", width: 100, sortable: true },
             { title: "货物代码", field: "CargoCode", width: 100, sortable: true },
             { title: "货物名称", field: "CargoName", width: 80, sortable: false },
             { title: "规格型号", field: "Spcf", width: 100, sortable: false },
@@ -31,14 +33,13 @@ function initable() {
             { title: "单价", field: "Price", width: 100, sortable: false },
             { title: "币制", field: "Curr", width: 80, sortable: false },
             {
-                title: "长宽高", field: "Length", width: 100, sortable: false,
-                formatter: function (value, row, index) {
+                title: "长宽高", field: "Length", width: 100, sortable: false, formatter: function (value, row, index) {
                     return row.Length + '*' + row.Width + '*' + row.Height;
                 }
             },
             { title: "体积", field: "Vol", width: 80, sortable: false },
             { title: "备注", field: "Remark", width: 80, sortable: false },
-            { field: 'CreateTime', title: '创建时间', width: 100, align: 'center' }
+            { title: '创建时间', field: 'CreationTime', width: 200, align: 'center' }
         ]]
     });
 }
@@ -90,13 +91,13 @@ function deleteCargo() {
                         codes.push(rows[i].Id);
                     }
                     $.post("/Cargo/Delete", { "ids": codes.join(',') }, function (data) {
-                        if (data == "OK") {
+                        if (data === "OK") {
                             $.messager.alert("提示", "删除成功！");
                             $("#dgCargo").datagrid("clearChecked");
                             $("#dgCargo").datagrid("clearSelections");
                             $("#dgCargo").datagrid("load", {});
                         }
-                        else if (data == "NO") {
+                        else if (data === "NO") {
                             $.messager.alert("提示", "删除失败！");
                             return;
                         }
@@ -105,6 +106,13 @@ function deleteCargo() {
             });
         }
     })
+}
+
+//查询
+function Search() {
+    var _$form = $('form[name=searchform]');
+    var params = _$form.serializeFormToObject();
+    $('#dgCargo').datagrid({ queryParams: params });
 }
 
 //清空文本框
@@ -157,13 +165,12 @@ function showCargoDialog() {
         //启用
         //保存
         var id = $("#IDUpdate").val();
-        if (id == "" || id == undefined) {
+        if (id === "" || id == undefined) {
             //验证
             $.messager.confirm('确认', '您确认要保存吗？', function (r) {
                 if (r) {
                     var postData = GetCargo();
-                    if (postData == null || postData == undefined || postData.SupplierId == ""
-                        || postData.CargoCode == "" || postData.CargoName == "" || postData.Unit == "") {
+                    if (postData == null || postData == undefined || postData.SupplierId == "" || postData.CargoCode == "" || postData.CargoName == "" || postData.Unit == "") {
                         $.messager.alert('提示', ' 请填写相关必填项！', 'warning');
                         return;
                     }
@@ -193,27 +200,23 @@ function showCargoDialog() {
 function saveDetail() {
     $.messager.confirm('确认', '您确认要修改吗？', function (r) {
         var postData = GetCargo();
-        if (postData == null || postData == undefined || postData.SupplierId == ""
-            || postData.CargoCode == "") {
+        if (postData == null || postData == undefined || postData.SupplierId == "" || postData.CargoCode == "") {
             $.messager.alert('提示', ' 请填写相关必填项！', 'warning');
             return;
         }
         $.post("/Cargo/Update", postData, function (data) {
-            // alert(data);
+            // alert(data); 
             var obj = JSON.parse(data);
             if (obj.result == "OK") {
-                if (data == "OK") {
-                    $.messager.alert("提示", "修改成功！");
-                    $("#divAddUpdCargo").dialog("close");
-                    initable();
-                }
-                else {
-                    $.messager.alert("提示", "修改失败！");
-                    return;
-                }
-
-            });
-
+                $.messager.alert("提示", "修改成功！");
+                $("#divAddUpdCargo").dialog("close");
+                initable();
+            }
+            else if (obj.result == "NO") {
+                $.messager.alert("提示", "修改失败！");
+                return;
+            }
+        });
     })
 }
 

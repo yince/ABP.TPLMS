@@ -18,7 +18,7 @@
     </script>
 }
 <div data-options="region:'center'" style="overflow: hidden;">
-    <div id="containter" style="width: 1000px; height: auto; margin: 0px auto;">
+    <div id="containter" style="width: auto; height: auto; margin: 0px auto;">
         <!--toolbar-->
         <div style="margin-bottom:1px;font-weight:bold;">
             <a href="#" id="add" class="easyui-linkbutton" data-options="iconCls:'icon-add'"
@@ -30,6 +30,17 @@
             <a href="#" id="reload" class="easyui-linkbutton" data-options="iconCls:'icon-reload'"
                style="width:100px; height:30px; ">刷新</a>
         </div>
+        <div id="dg-button">
+        <form name="searchform" method="post" action="" id="searchform">
+            <label for="Name">货物名称：</label>
+            <input name="Name" id="Name" class="easyui-validatebox" data-options="width:200" />
+            <label for="Code">货物代码：</label>
+            <input name="Code" id="Code" class="easyui-validatebox" data-options="width:150" />
+            <label for="HsCode">商品编码：</label>
+            <input name="HsCode" id="HsCode" class="easyui-validatebox" data-options="width:100" />
+            <a href="#" id="search" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="Search()">查询</a>
+        </form>
+    </div>
         <!--panel-->
         <div data-options="region:'center',split:false" style="height:500px;">
             <!--表格-->

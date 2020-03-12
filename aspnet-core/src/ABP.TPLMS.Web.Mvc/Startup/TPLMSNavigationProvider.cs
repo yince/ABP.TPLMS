@@ -79,6 +79,14 @@ namespace ABP.TPLMS.Web.Startup
                         icon: "people"
                     )
                 )
+                .AddItem(
+                    new MenuItemDefinition(
+                        PageNames.Org,
+                        L("Org"),
+                        url: "Org",
+                        icon: "business"
+                        )
+                    )
                 //.AddItem(subMenu)
                 .AddItem(
                     new MenuItemDefinition(

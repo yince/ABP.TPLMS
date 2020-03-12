@@ -10,6 +10,7 @@
         public const string Module = "Module";
         public const string Supplier = "Supplier";
         public const string Cargo = "Cargo";
+        public const string Org = "Org";
 
     }
 }
